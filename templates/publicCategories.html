@@ -1,0 +1,42 @@
+{% extends "main.html" %}
+{% block content %}
+
+<body>
+
+	<div>
+		
+		<h1 class="sub-heading">Categories</h1>
+		
+		<a href="{{url_for('showLogin')}}">
+			<button class="btn btn-default login">Login</button> 
+		</a>
+		
+		
+	</div>
+
+<div class = 'flash'>
+	{% with messages = get_flashed_messages() %}
+	    {% if messages %}
+		  
+		<ul>
+		{% for message in messages %}
+			<li> <strong> {{ message }} </strong> </li>
+		{% endfor %}
+		</ul>
+		{% endif %}
+	{% endwith %}
+
+</div>
+	
+	
+	{% for category in categories %}
+		<a href = "{{url_for('showItems', category_id = category.id)}}">
+
+			<h3>{{category.name}}</h3>
+			<hr>
+			
+		</a>
+	{% endfor %}
+
+</body>
+{% endblock %}

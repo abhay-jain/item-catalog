@@ -1,0 +1,70 @@
+<html>
+<head>
+     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.2/jquery.min.js">
+    </script>
+
+    <script src="//apis.google.com/js/platform.js?onload=start"> </script>
+    <link rel="stylesheet" type="text/css" href="{{url_for('static', filename='styles.css')}}">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+
+<body>
+
+    <div class="container">
+
+        <h1 class="panel-heading"> Item Catalog </h1>
+    </br></br>
+    
+        <h1>Login</h1>
+    </br></br></br>
+
+        <div id="signinButton">
+            <span class="g-signin"
+                data-scope="openid email"
+                data-clientid="305667741980-9o7ekqomnd1ee5jtr3ddgm65uie0lj3h.apps.googleusercontent.com"
+                data-redirecturi="postmessage"
+                data-accesstype="offine"
+                data-cookiepolicy="single_host_origin"
+                data-callback="signInCallback"
+                data-approvalprompt= "force">
+            </span>
+        </div>
+        <div id="result"></div>
+
+        <script>
+            function signInCallback(authResult) {
+                if(authResult['code']) {
+
+                    //Hide the signin button now that the user is authorized
+                    $('#signinButton').attr('style', 'display: none');
+
+                    //Send the one time use code to the server, if server responds, write a 'login successful' message and redirect back to restaurant main page
+                    $.ajax({
+                        type: 'POST',
+                        url: '/gconnect?state={{STATE}}',
+                        processData: false,
+                        data: authResult['code'],
+                        contentType: 'application/octet-stream; charset=utf-8',
+                        success: function(result) {
+                            //Handle or verify the server response if neccessary
+                            if(result) {
+                                $('#result').html('Login successful!</br>' + result + '</br>Redirecting...')
+                                setTimeout(function(){
+                                    window.location.href= "/categories";
+                                }, 4000);
+                            
+                            } else if (authResult['error']) {
+
+                                console.log('There was an error: ' + authResult['error']);
+                            } else {
+                                $('#result').html('Failed to make a server-side call. Check your configuration and console');
+                            }
+                        }
+                    });
+                }
+            }
+        </script>
+    </div>
+</body>
+</html>

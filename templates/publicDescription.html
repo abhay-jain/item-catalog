@@ -1,0 +1,23 @@
+{% extends "main.html" %}
+{% block content %}
+
+<body>
+	<div>
+		<h1>Item Description</h1>
+				
+		<a href="{{url_for('showLogin')}}">
+			<button class="btn btn-default login">Login</button> 
+		</a>
+	</div>
+
+	<p>
+		<a href="{{url_for('showItems', category_id= item.category_id)}}">Go back to Item List</a>
+	</p>
+
+</br></br>
+	<p><strong>{{item.name}}</strong></p>
+</br>
+	<p>{{item.description}}</p>
+
+</body>
+{% endblock %}
