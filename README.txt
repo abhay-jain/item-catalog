@@ -1,8 +1,3 @@
-NOTE :	Many parts of this application contains code that I have used from
-	the Udacity lessons. Most of it isa standard code like /login, /gconnect,
-	/gdisconnect. All the logical parts of code have been written
-	by me myself.
-
 ## About
 This project is a RESTful web application utilizing the Flask framework which accesses a SQL database that populates categories and their items. OAuth2 provides authentication for further CRUD functionality on the application. Currently OAuth2 is implemented for Google Accounts.
 
@@ -43,3 +38,9 @@ Category Items JSON: `/categories/<int:category_id>/items/JSON`
 
 Category Item JSON: `/categories/<int:category_id>/items/<int:item_id>/JSON`
     - Displays a specific category item.
+
+
+NOTE :	Many parts of this application contains code that I have used from
+	the Udacity lessons. Most of it isa standard code like /login, /gconnect,
+	/gdisconnect. All the logical parts of code have been written
+	by me myself.
